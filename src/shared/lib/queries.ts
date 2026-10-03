@@ -11,6 +11,12 @@ import {
   saveCategory,
   saveTransaction,
   deleteTransaction,
+  listBudgets,
+  saveBudget,
+  deleteBudget,
+  listGoals,
+  saveGoal,
+  deleteGoal,
 } from './repo'
 import { getSettings, saveSettings } from './db'
 
@@ -48,6 +54,14 @@ export function useSettings() {
   return useQuery({ queryKey: ['settings'], queryFn: getSettings })
 }
 
+export function useBudgets() {
+  return useQuery({ queryKey: ['budgets'], queryFn: listBudgets })
+}
+
+export function useGoals() {
+  return useQuery({ queryKey: ['goals'], queryFn: listGoals })
+}
+
 export const useSaveAccount = () => useWrite(saveAccount)
 export const useArchiveAccount = () => useWrite(archiveAccount)
 export const useDeleteAccount = () => useWrite(deleteAccount)
@@ -55,4 +69,8 @@ export const useSaveCategory = () => useWrite(saveCategory)
 export const useDeleteCategory = () => useWrite(deleteCategory)
 export const useSaveTransaction = () => useWrite(saveTransaction)
 export const useDeleteTransaction = () => useWrite(deleteTransaction)
+export const useSaveBudget = () => useWrite(saveBudget)
+export const useDeleteBudget = () => useWrite(deleteBudget)
+export const useSaveGoal = () => useWrite(saveGoal)
+export const useDeleteGoal = () => useWrite(deleteGoal)
 export const useSaveSettings = () => useWrite(saveSettings)

@@ -1,41 +1,22 @@
 import { createBrowserRouter } from 'react-router'
 import { AppShell } from './AppShell'
-import { Placeholder, Screen } from '@/shared/ui/Screen'
+import { OverviewScreen } from '@/features/overview/OverviewScreen'
+import { BudgetScreen } from '@/features/budget/BudgetScreen'
+import { AnalyticsScreen } from '@/features/analytics/AnalyticsScreen'
 import { AddSheet } from '@/features/transactions/AddSheet'
 import { TransactionsScreen } from '@/features/transactions/TransactionsScreen'
 import { SettingsScreen } from '@/features/settings/SettingsScreen'
 import { AccountsScreen } from '@/features/accounts/AccountsScreen'
 import { CategoriesScreen } from '@/features/categories/CategoriesScreen'
 
-/** Screens arrive feature by feature; these stand in until they do. */
-const stub = (title: string, kicker: string, text: string, settings = false) => (
-  <Screen title={title} kicker={kicker} settings={settings}>
-    <Placeholder text={text} />
-  </Screen>
-)
-
 export const router = createBrowserRouter([
   {
     element: <AppShell />,
     children: [
-      {
-        index: true,
-        element: stub(
-          'Обзор',
-          'Октябрь 2026 · BYN',
-          'Виджеты баланса, расходов\nи бюджетов появятся здесь',
-          true,
-        ),
-      },
+      { index: true, element: <OverviewScreen /> },
       { path: 'transactions', element: <TransactionsScreen /> },
-      {
-        path: 'budget',
-        element: stub('Бюджет', 'Октябрь 2026', 'Конверты, лимиты,\nцели накоплений'),
-      },
-      {
-        path: 'analytics',
-        element: stub('Аналитика', 'Куда уходят деньги', 'Графики по категориям\nи периодам'),
-      },
+      { path: 'budget', element: <BudgetScreen /> },
+      { path: 'analytics', element: <AnalyticsScreen /> },
       { path: 'settings', element: <SettingsScreen /> },
       { path: 'accounts', element: <AccountsScreen /> },
       { path: 'categories', element: <CategoriesScreen /> },

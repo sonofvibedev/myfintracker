@@ -1,5 +1,5 @@
 import { db, newId } from './db'
-import type { Account, Category, Transaction } from './types'
+import type { Account, Budget, Category, Goal, Transaction } from './types'
 import type { Minor } from './money'
 
 /* ---------- accounts ---------- */
@@ -144,4 +144,40 @@ export async function saveTransaction(
 
 export async function deleteTransaction(id: string) {
   await (await db()).delete('transactions', id)
+}
+
+/* ---------- budgets ---------- */
+
+export async function listBudgets(): Promise<Budget[]> {
+  return (await db()).getAll('budgets')
+}
+
+export async function saveBudget(input: Omit<Budget, 'id'> & Partial<Budget>) {
+  const d = await db()
+  const existing = input.id ? await d.get('budgets', input.id) : undefined
+  const budget: Budget = { ...existing, ...input, id: input.id ?? newId() }
+  await d.put('budgets', budget)
+  return budget
+}
+
+export async function deleteBudget(id: string) {
+  await (await db()).delete('budgets', id)
+}
+
+/* ---------- goals ---------- */
+
+export async function listGoals(): Promise<Goal[]> {
+  return (await db()).getAll('goals')
+}
+
+export async function saveGoal(input: Omit<Goal, 'id'> & Partial<Goal>) {
+  const d = await db()
+  const existing = input.id ? await d.get('goals', input.id) : undefined
+  const goal: Goal = { ...existing, ...input, id: input.id ?? newId() }
+  await d.put('goals', goal)
+  return goal
+}
+
+export async function deleteGoal(id: string) {
+  await (await db()).delete('goals', id)
 }
