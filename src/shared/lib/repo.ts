@@ -44,13 +44,10 @@ export async function deleteAccount(id: string) {
 }
 
 /** Balances are derived, never stored, so they cannot drift from the transactions. */
-export async function accountBalances(): Promise<Record<string, Minor>> {
-  const d = await db()
-  const [accounts, transactions] = await Promise.all([
-    d.getAll('accounts'),
-    d.getAll('transactions'),
-  ])
-
+export function computeBalances(
+  accounts: Pick<Account, 'id' | 'initialBalance'>[],
+  transactions: Pick<Transaction, 'type' | 'accountId' | 'toAccountId' | 'amount'>[],
+): Record<string, Minor> {
   const balances: Record<string, Minor> = {}
   for (const a of accounts) balances[a.id] = a.initialBalance
 
@@ -65,6 +62,15 @@ export async function accountBalances(): Promise<Record<string, Minor>> {
     }
   }
   return balances
+}
+
+export async function accountBalances(): Promise<Record<string, Minor>> {
+  const d = await db()
+  const [accounts, transactions] = await Promise.all([
+    d.getAll('accounts'),
+    d.getAll('transactions'),
+  ])
+  return computeBalances(accounts, transactions)
 }
 
 /* ---------- categories ---------- */

@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router'
 import { AppShell } from './AppShell'
 import { Placeholder, Screen } from '@/shared/ui/Screen'
 import { AddSheet } from '@/features/transactions/AddSheet'
+import { TransactionsScreen } from '@/features/transactions/TransactionsScreen'
 import { SettingsScreen } from '@/features/settings/SettingsScreen'
 import { AccountsScreen } from '@/features/accounts/AccountsScreen'
 import { CategoriesScreen } from '@/features/categories/CategoriesScreen'
@@ -26,10 +27,7 @@ export const router = createBrowserRouter([
           true,
         ),
       },
-      {
-        path: 'transactions',
-        element: stub('Операции', 'История', 'Список с поиском\nи фильтрами'),
-      },
+      { path: 'transactions', element: <TransactionsScreen /> },
       {
         path: 'budget',
         element: stub('Бюджет', 'Октябрь 2026', 'Конверты, лимиты,\nцели накоплений'),
