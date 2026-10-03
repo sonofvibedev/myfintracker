@@ -69,11 +69,17 @@ export type Goal = {
   color: string
 }
 
+export type Frequency = 'day' | 'week' | 'month' | 'year'
+
 export type Recurring = {
   id: Id
+  name: string
   template: Omit<Transaction, 'id' | 'happenedAt' | 'createdAt'>
-  rrule: string
+  frequency: Frequency
+  /** Every `interval` units of `frequency`: 2 + 'week' is every fortnight. */
+  interval: number
   nextRunAt: string
+  /** Post automatically when due, or wait to be confirmed. */
   autoPost: boolean
   active: boolean
 }

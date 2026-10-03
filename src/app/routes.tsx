@@ -8,6 +8,7 @@ import { TransactionsScreen } from '@/features/transactions/TransactionsScreen'
 import { SettingsScreen } from '@/features/settings/SettingsScreen'
 import { AccountsScreen } from '@/features/accounts/AccountsScreen'
 import { CategoriesScreen } from '@/features/categories/CategoriesScreen'
+import { RecurringScreen } from '@/features/planning/RecurringScreen'
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ export const router = createBrowserRouter([
       { path: 'settings', element: <SettingsScreen /> },
       { path: 'accounts', element: <AccountsScreen /> },
       { path: 'categories', element: <CategoriesScreen /> },
+      { path: 'recurring', element: <RecurringScreen /> },
     ],
   },
   { path: 'add', element: <AddSheet /> },

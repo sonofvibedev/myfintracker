@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { motion } from 'motion/react'
+import { Link } from 'react-router'
 import { Screen } from '@/shared/ui/Screen'
 import { Button, ColorPicker, Field, IconPicker, Select, Sheet } from '@/shared/ui/kit'
 import {
@@ -322,6 +323,17 @@ export function BudgetScreen() {
           )
         })}
       </ul>
+
+      <Link
+        to="/recurring"
+        className="border-line bg-card mt-6 flex items-center justify-between rounded-lg border p-4 shadow-[var(--sh-2)] transition-transform duration-[var(--dur)] [transition-timing-function:var(--ease)] active:scale-[0.985]"
+      >
+        <span>
+          <span className="block text-[14.5px] font-semibold">Регулярные платежи</span>
+          <span className="text-tx-2 text-[11.5px]">Подписки, аренда, зарплата</span>
+        </span>
+        <span className="text-tx-2">›</span>
+      </Link>
 
       <Sheet
         open={budgetSheet}

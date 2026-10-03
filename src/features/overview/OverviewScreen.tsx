@@ -54,7 +54,7 @@ export function OverviewScreen() {
   /** Net worth over the last 30 days, walked backwards from today's balance. */
   const trend = useMemo(() => {
     const days = 30
-    const series = new Array<number>(days).fill(0)
+    const series = Array.from({ length: days }, () => 0)
     let running = netWorth
     const now = new Date()
 
@@ -73,7 +73,7 @@ export function OverviewScreen() {
   /** Spending per weekday within the current week. */
   const weekdays = useMemo(() => {
     const week = filterByRange(transactions, rangeOf('week'))
-    const sums = new Array<number>(7).fill(0)
+    const sums = Array.from({ length: 7 }, () => 0)
     for (const t of week) {
       if (t.type !== 'expense') continue
       sums[(new Date(t.happenedAt).getDay() + 6) % 7] += t.amountBase
