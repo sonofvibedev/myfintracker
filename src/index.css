@@ -1,0 +1,49 @@
+@import 'tailwindcss';
+@import './styles/tokens.css';
+@import './styles/themes.css';
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-card: var(--card);
+  --color-card-2: var(--card-2);
+  --color-line: var(--line);
+  --color-tx: var(--tx);
+  --color-tx-2: var(--tx-2);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-accent-ink: var(--accent-ink);
+  --color-up: var(--up);
+  --color-down: var(--down);
+
+  --font-sans: var(--font-ui);
+  --font-mono: var(--font-num);
+  --font-display: var(--font-display);
+
+  --radius-sm: var(--r-sm);
+  --radius-md: var(--r-md);
+  --radius-lg: var(--r-lg);
+  --radius-xl: var(--r-xl);
+}
+
+html {
+  color-scheme: light dark;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--tx);
+  font-family: var(--font-ui);
+  font-size: 15px;
+  line-height: 1.5;
+  transition:
+    background var(--dur) var(--ease),
+    color var(--dur) var(--ease);
+}
+
+/* Tabular figures everywhere money is shown. */
+.num {
+  font-family: var(--font-num);
+  font-variant-numeric: tabular-nums;
+}

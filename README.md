@@ -2,6 +2,8 @@
 
 Personal finance tracker: expenses, income, transfers, category budgets, envelopes, savings goals and analytics. Mobile-first web app with a bottom tab bar, built for day-to-day personal use. Base currency is the Belarusian ruble (BYN), with multi-currency operations converted at the National Bank rate on the transaction date.
 
+There is no server and no account. Everything lives in the browser's IndexedDB on the device you use, and JSON export is how you back it up or move it.
+
 ## Why
 
 Answer two questions reliably:
@@ -31,12 +33,12 @@ Answer two questions reliably:
 | Animation | Motion (formerly Framer Motion) |
 | Charts | Recharts for analytics, hand-written SVG for rings and sparklines |
 | Routing | React Router v7 |
-| State | TanStack Query for server data, Zustand for UI state |
-| Backend | Supabase — Postgres, Auth, Row Level Security |
+| State | TanStack Query over the local database, Zustand for UI state |
+| Storage | IndexedDB in the browser, via `idb`. No server, no account |
 | Forms | react-hook-form + zod |
 | Tests | Vitest, Playwright |
 
-Exchange rates come from the free NBRB API (`https://api.nbrb.by/exrates/rates`), refreshed daily by a Supabase edge function and stored in `exchange_rates`. Every transaction stores both its original amount and the base-currency amount computed at the time it happened, so historical figures never shift when rates change.
+Exchange rates come from the free NBRB API (`https://api.nbrb.by/exrates/rates`), fetched by the app once a day and cached locally. Every transaction stores both its original amount and the base-currency amount computed at the time it happened, so historical figures never shift when rates change.
 
 ## Project layout
 
@@ -53,12 +55,9 @@ src/
     settings/     palettes, currency, import/export
   shared/
     ui/           Button, Sheet, Ring, Bar, Card
-    lib/          supabase, money, dates, fx
+    lib/          db, money, types, dates, fx, theme
     hooks/
   styles/         tokens.css, themes.css
-supabase/
-  migrations/
-  functions/fetch-rates/
 design/           design concepts and interactive HTML prototypes
 ```
 
@@ -98,11 +97,15 @@ npm run test       # unit tests
 npm run test:e2e   # Playwright
 ```
 
-Copy `.env.example` to `.env` and fill in the Supabase project URL and publishable key.
+No environment variables and no setup. Open the app and start entering transactions.
 
 ## Money handling
 
-Amounts are stored as `numeric(12,2)` in Postgres and handled as integer minor units in JavaScript. Floating-point arithmetic is never used for money. Account balances are derived from transactions through a view rather than stored in a column, so there is nothing to fall out of sync.
+Amounts are stored and handled as integer minor units (kopecks). Floating-point arithmetic is never used for money. Account balances are derived from transactions rather than stored on the account, so there is nothing to fall out of sync.
+
+## Your data
+
+Data never leaves the device. That also means nothing restores it if you clear site data or lose the machine, so the JSON export is the backup — use it. Import reads the same format back.
 
 ## Status
 
