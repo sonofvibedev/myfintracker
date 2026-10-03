@@ -3,6 +3,8 @@ import { AppShell } from './AppShell'
 import { Placeholder, Screen } from '@/shared/ui/Screen'
 import { AddSheet } from '@/features/transactions/AddSheet'
 import { SettingsScreen } from '@/features/settings/SettingsScreen'
+import { AccountsScreen } from '@/features/accounts/AccountsScreen'
+import { CategoriesScreen } from '@/features/categories/CategoriesScreen'
 
 /** Screens arrive feature by feature; these stand in until they do. */
 const stub = (title: string, kicker: string, text: string, settings = false) => (
@@ -37,6 +39,8 @@ export const router = createBrowserRouter([
         element: stub('Аналитика', 'Куда уходят деньги', 'Графики по категориям\nи периодам'),
       },
       { path: 'settings', element: <SettingsScreen /> },
+      { path: 'accounts', element: <AccountsScreen /> },
+      { path: 'categories', element: <CategoriesScreen /> },
     ],
   },
   { path: 'add', element: <AddSheet /> },

@@ -1,3 +1,4 @@
+import { Link } from 'react-router'
 import { Screen } from '@/shared/ui/Screen'
 import { useTheme, type Palette, type Theme } from '@/shared/lib/theme'
 
@@ -18,6 +19,25 @@ export function SettingsScreen() {
 
   return (
     <Screen title="Настройки" kicker="Оформление">
+      <nav className="mb-4 flex flex-col gap-2">
+        {[
+          { to: '/accounts', label: 'Счета', hint: 'Кошельки, карты, накопления' },
+          { to: '/categories', label: 'Категории', hint: 'Иконки, цвета, вложенность' },
+        ].map((l) => (
+          <Link
+            key={l.to}
+            to={l.to}
+            className="border-line bg-card flex items-center justify-between rounded-lg border p-4 shadow-[var(--sh-2)] transition-transform duration-[var(--dur)] [transition-timing-function:var(--ease)] active:scale-[0.985]"
+          >
+            <span>
+              <span className="block text-[14.5px] font-semibold">{l.label}</span>
+              <span className="text-tx-2 text-[11.5px]">{l.hint}</span>
+            </span>
+            <span className="text-tx-2">›</span>
+          </Link>
+        ))}
+      </nav>
+
       <section className="border-line bg-card rounded-xl border p-4 shadow-[var(--sh-2)]">
         <h2 className="text-tx-2 text-[11.5px] font-semibold tracking-wider uppercase">Тема</h2>
         <div className="bg-card-2 mt-2 grid grid-cols-3 gap-1.5 rounded-md p-1">
