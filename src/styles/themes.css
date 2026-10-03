@@ -1,0 +1,125 @@
+/* Palettes.
+   A palette is chosen with data-palette on <html>, light/dark with data-theme.
+   With no data-theme the system preference decides. */
+
+:root,
+[data-palette='indigo'] {
+  --bg: #f6f7fb;
+  --card: #ffffff;
+  --card-2: #f0f2f8;
+  --line: #e3e7f0;
+  --tx: #141828;
+  --tx-2: #6c7489;
+  --accent: #5b5bd6;
+  --accent-2: #8b6fef;
+  --accent-ink: #ffffff;
+  --up: #1f9d6e;
+  --down: #e04f5f;
+  --cat-1: #5b5bd6;
+  --cat-2: #8b6fef;
+  --cat-3: #d96fc0;
+  --cat-4: #f08b5a;
+  --cat-5: #4fb8a8;
+  --cat-6: #4a9ae8;
+}
+
+[data-palette='forest'] {
+  --bg: #f4f7f3;
+  --card: #ffffff;
+  --card-2: #eaf0e8;
+  --line: #dde6da;
+  --tx: #16201a;
+  --tx-2: #637063;
+  --accent: #2f7d55;
+  --accent-2: #5ea97a;
+  --accent-ink: #ffffff;
+  --up: #2f7d55;
+  --down: #c2543f;
+  --cat-1: #2f7d55;
+  --cat-2: #5ea97a;
+  --cat-3: #c9a227;
+  --cat-4: #c2543f;
+  --cat-5: #3e7f8c;
+  --cat-6: #7a6aa8;
+}
+
+[data-palette='ember'] {
+  --bg: #fbf6f2;
+  --card: #ffffff;
+  --card-2: #f4ebe3;
+  --line: #ead9cc;
+  --tx: #231a14;
+  --tx-2: #7d6a5c;
+  --accent: #b5442f;
+  --accent-2: #e0764a;
+  --accent-ink: #ffffff;
+  --up: #4f8a5c;
+  --down: #b5442f;
+  --cat-1: #b5442f;
+  --cat-2: #e0764a;
+  --cat-3: #c99a2e;
+  --cat-4: #7e4a6b;
+  --cat-5: #3e8585;
+  --cat-6: #44557e;
+}
+
+/* Dark overrides. Applied when the user asked for dark, or when the system
+   prefers dark and the user has not asked for light. */
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #0e1018;
+    --card: #171a26;
+    --card-2: #1f2332;
+    --line: #272c3c;
+    --tx: #edeff6;
+    --tx-2: #8f97ad;
+    --sh-2: 0 1px 2px rgb(0 0 0 / 0.4), 0 10px 30px -14px rgb(0 0 0 / 0.6);
+  }
+
+  [data-palette='forest']:not([data-theme='light']) {
+    --bg: #0d130f;
+    --card: #151d18;
+    --card-2: #1d2820;
+    --line: #26332a;
+    --tx: #e8efe9;
+    --tx-2: #8a9a8d;
+  }
+
+  [data-palette='ember']:not([data-theme='light']) {
+    --bg: #14100d;
+    --card: #1d1814;
+    --card-2: #27201a;
+    --line: #33291f;
+    --tx: #f2e9e1;
+    --tx-2: #9b8878;
+  }
+}
+
+:root[data-theme='dark'] {
+  --bg: #0e1018;
+  --card: #171a26;
+  --card-2: #1f2332;
+  --line: #272c3c;
+  --tx: #edeff6;
+  --tx-2: #8f97ad;
+  --sh-2: 0 1px 2px rgb(0 0 0 / 0.4), 0 10px 30px -14px rgb(0 0 0 / 0.6);
+}
+
+[data-palette='forest'][data-theme='dark'] {
+  --bg: #0d130f;
+  --card: #151d18;
+  --card-2: #1d2820;
+  --line: #26332a;
+  --tx: #e8efe9;
+  --tx-2: #8a9a8d;
+}
+
+[data-palette='ember'][data-theme='dark'] {
+  --bg: #14100d;
+  --card: #1d1814;
+  --card-2: #27201a;
+  --line: #33291f;
+  --tx: #f2e9e1;
+  --tx-2: #9b8878;
+}
