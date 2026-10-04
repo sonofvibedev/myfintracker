@@ -107,9 +107,17 @@ Amounts are stored and handled as integer minor units (kopecks). Floating-point 
 
 Data never leaves the device. That also means nothing restores it if you clear site data or lose the machine, so the JSON export is the backup — use it. Import reads the same format back.
 
+## Live
+
+**https://sonofvibedev.github.io/myfintracker/**
+
+Published from `main` on every push, with linting and tests gating the deploy. Open it on a phone and add it to the home screen to use it as an app.
+
+Deep links work through the Pages single-page fallback, so a direct visit to an inner route is served with a 404 status even though the page renders correctly. Moving to a host with real rewrites — the included `vercel.json` covers that — removes the quirk.
+
 ## Status
 
-In development. See the issue tracker for the current plan.
+Feature complete for personal use. See the issue tracker for anything still open.
 
 ## License
 
