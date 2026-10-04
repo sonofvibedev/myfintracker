@@ -4,7 +4,11 @@ import tailwindcss from '@tailwindcss/vite'
 import { VitePWA } from 'vite-plugin-pwa'
 import { fileURLToPath, URL } from 'node:url'
 
+// GitHub Pages serves a project repo from a sub-path; everything else from the root.
+const base = process.env.GITHUB_PAGES === 'true' ? '/myfintracker/' : '/'
+
 export default defineConfig({
+  base,
   plugins: [
     react(),
     tailwindcss(),
@@ -16,7 +20,9 @@ export default defineConfig({
         short_name: 'Финансы',
         description: 'Личный финансовый трекер: расходы, бюджеты, конверты и цели',
         lang: 'ru',
-        start_url: '/',
+        id: base,
+        start_url: base,
+        scope: base,
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#f6f7fb',

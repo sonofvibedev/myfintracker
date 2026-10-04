@@ -25,4 +25,4 @@ export const router = createBrowserRouter([
     ],
   },
   { path: 'add', element: <AddSheet /> },
-])
+], { basename: import.meta.env.BASE_URL.replace(/\/$/, '') })
